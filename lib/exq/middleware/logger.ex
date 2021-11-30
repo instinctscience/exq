@@ -6,12 +6,12 @@ defmodule Exq.Middleware.Logger do
   require Logger
 
   def before_work(pipeline) do
-    Logger.info("#{log_context(pipeline)} start")
+    Logger.debug("#{log_context(pipeline)} start")
     assign(pipeline, :started_at, DateTime.utc_now())
   end
 
   def after_processed_work(pipeline) do
-    Logger.info("#{log_context(pipeline)} done: #{formatted_diff(delta(pipeline))}")
+    Logger.debug("#{log_context(pipeline)} done: #{formatted_diff(delta(pipeline))}")
     pipeline
   end
 
