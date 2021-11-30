@@ -85,11 +85,15 @@ defmodule Exq.Worker.Server do
   @doc """
   Kickoff work associated with worker.
 
-  This step handles:
+  cast(self(), :work) step handles:
   * Parsing of JSON object
   * Preparation of target module
 
-  Calls :dispatch to then call target module.
+  cast(self(), :dispach) handles:
+  * calls :perform method of target
+
+  cast(self(), :done) handles:
+  * Worker done with normal termination message
   """
   def handle_cast(:work, state) do
     state = %{state | middleware_state: Middleware.all(state.middleware)}
@@ -104,9 +108,6 @@ defmodule Exq.Worker.Server do
     {:noreply, state}
   end
 
-  @doc """
-  Dispatch work to the target module (call :perform method of target).
-  """
   def handle_cast(:dispatch, state) do
     dispatch_work(
       state.pipeline.assigns.worker_module,
@@ -117,9 +118,6 @@ defmodule Exq.Worker.Server do
     {:noreply, state}
   end
 
-  @doc """
-  Worker done with normal termination message.
-  """
   def handle_cast({:done, result}, state) do
     state =
       if !has_pipeline_after_work_ran?(state.pipeline) do
