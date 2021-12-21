@@ -5,6 +5,37 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+
+## [0.16.1] - 2021-12-13
+
+### Added
+
+### Changed
+
+### Fixed
+- Fix @doc redefined warnings #463 by deepfryed
+
+## [0.16.0] - 2021-12-12
+
+NOTE: Please read PR #458 for upgrade instructions.
+
+### Added
+- Add retried_at field for Sidekiq compatibility #450 by @ananthakumaran
+- Add apis to support exq_ui #452 by @ananthakumaran
+- Add documentation about mode: :enqueuer and Exq.Enqueuer.queue_in #456 by @dbernheisel
+- Add api to immediately enqeueue jobs from retry/scheduled queue #461 by @ananthakumaran
+- Add api to re-enqueue dead job #462 by @ananthakumaran
+
+### Changed
+- Add Sidekiq 5 compatibility #458 by @ananthakumaran
+- Use latest Phoenix child spec style #459 by @vovayartsev
+- Replace deprecated supervisor calls #453 by @vkuznetsov
+
+### Fixed
+- Handle timeouts on middleware pipeline #444 by @ananthakumaran
+- Use the correct scheduled time for enqueued_at field for mock #449 by @ananthakumaran
+
+
 ## [0.15.0] - 2021-07-19
 
 ### Added
@@ -20,7 +51,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - use Task instead of spawn_link for starting workers #436 by @mitchellhenke
 
 ### Fixed
-- re-enqueue unfinished jobs to the begining of queue on restart #424 by @ananthakumaran
+- re-enqueue unfinished jobs to the beginning of queue on restart #424 by @ananthakumaran
 - Fix for sentinel 0.11.0+ #428 by @ananthakumaran
 - Fixes for generated HTML docs by #442 @kianmeng
 
